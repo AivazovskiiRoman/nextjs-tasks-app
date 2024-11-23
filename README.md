@@ -2,6 +2,8 @@
 
 This is the front-end of the Todo App built with Next.js, which interacts with the Express API for handling tasks.
 
+![Todo App Demo](https://media-invictus-assets.s3.amazonaws.com/assets/img/Todo-App-Demo.png)
+
 **Features:**
 
 * View a list of tasks with their title, color, and completed status.
