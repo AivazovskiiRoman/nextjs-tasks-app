@@ -10,7 +10,7 @@ This is the front-end of the Todo App built with Next.js, which interacts with t
 * Responsive and clean UI.
 
 **Repository Structure:**
-
+```bash
 nextjs-tasks-app/
 │
 ├── public/                     # Static files
@@ -30,7 +30,7 @@ nextjs-tasks-app/
 ├── .env.local                  # Environment variables
 ├── package.json                # Project dependencies and scripts
 └── README.md                   # Project documentation
-
+```
 **Setup Instructions:**
 
 1. Clone the repository: `git clone https://github.com/AivazovskiiRoman/nextjs-tasks-app.git`
