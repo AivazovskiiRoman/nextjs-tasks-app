@@ -8,7 +8,7 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
         customBlue: {
-          light: "#7FD4FF",
+          light: "#1E6F9F",
           DEFAULT: "#4EA8DE",
           dark: "#3A8BB2",
         },

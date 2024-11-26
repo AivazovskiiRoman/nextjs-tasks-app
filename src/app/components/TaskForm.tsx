@@ -33,7 +33,7 @@ export function TaskForm({
         <ColorPicker register={register} control={control} />
         {error && <div className="text-red-500 my-5">{error}</div>}
         <button
-          className="bg-[#1E6F9F] hover:bg-[#2f78a3] active:bg-[#1A5F76] active:scale-95 transition-all duration-300 text-white font-[600] py-3 rounded-[8px] flex items-center justify-center shadow-md max-w-740 w-full"
+          className="bg-customBlue-light hover:bg-[#2f78a3] active:bg-[#1A5F76] active:scale-95 transition-all duration-300 text-white font-[600] py-3 rounded-[8px] flex items-center justify-center shadow-md max-w-740 w-full"
           type="submit"
         >
           {submitLabel}
