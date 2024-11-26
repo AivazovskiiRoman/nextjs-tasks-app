@@ -2,11 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { TASKS_API } from "@/lib/constants/tasks";
 import TaskCard from "@/app/components/TaskCard";
+import SearchTasksWithFilter from "@/app/components/SearchTasksWithFilter";
+import SearchClientTasksFuse from "@/app/components/SearchClientTasksFuse";
+import SearchTasksWithAPI from "@/app/components/SearchTasksWithAPI";
 import Image from "next/image";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
   const [completedCount, setCompletedCount] = useState(0);
+  const [activeTab, setActiveTab] = useState("filter");
 
   useEffect(() => {
     fetchTasks();
@@ -17,6 +22,7 @@ export default function TaskList() {
       TASKS_API.endpoints.list() as string
     );
     setTasks(response.data);
+    setFilteredTasks(response.data);
     setCompletedCount(
       response.data.filter((task: Task) => task.completed).length
     );
@@ -36,8 +42,44 @@ export default function TaskList() {
     }
   };
 
+  const handleSearch = (filtered: Task[]) => {
+    setFilteredTasks(filtered);
+  };
+
+  const handleTabChange = (tab: string) => {
+    setFilteredTasks(tasks);
+    setActiveTab(tab);
+  };
+
   return (
     <div className="max-w-740 w-full mx-auto mt-20 p-[1rem] md:p-0">
+      <div className="py-4">
+        <span className="text-customBlue font-[600]">Search</span>
+        <div className="tabs flex space-x-4 my-4">
+          <button
+            onClick={() => handleTabChange("filter")}
+            className={`py-2 px-4 rounded bg-customBlue-light ${activeTab === "filter" ? "" : "opacity-40"}`}
+          >
+            JS filter
+          </button>
+          <button
+            onClick={() => handleTabChange("client")}
+            className={`py-2 px-4 rounded bg-customBlue-light ${activeTab === "client" ? "" : "opacity-40"}`}
+          >
+            Fuse client
+          </button>
+          <button
+            onClick={() => handleTabChange("api")}
+            className={`py-2 px-4 rounded bg-customBlue-light ${activeTab === "api" ? "" : "opacity-40"}`}
+          >
+            API
+          </button>
+        </div>
+        {activeTab === "filter" && <SearchTasksWithFilter tasks={tasks} onSearch={handleSearch} />}
+        {activeTab === "client" && <SearchClientTasksFuse tasks={tasks} onSearch={handleSearch} />}
+        {activeTab === "api" && <SearchTasksWithAPI tasks={tasks} onSearch={handleSearch} />}
+      </div>
+
       <div className="flex justify-between items-center py-4">
         <div className="flex items-center space-x-2">
           <span className="text-customBlue font-[600]">Tasks:</span>
@@ -55,8 +97,8 @@ export default function TaskList() {
         </div>
       </div>
       <div className="task-list">
-        {tasks.length > 0 ? (
-          tasks.map((task) => (
+        {filteredTasks.length > 0 ? (
+          filteredTasks.map((task) => (
             <TaskCard
               key={task.id}
               task={task}

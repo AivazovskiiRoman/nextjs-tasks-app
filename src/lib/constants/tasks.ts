@@ -6,5 +6,6 @@ export const TASKS_API = {
     create: () => TASKS_API.baseUrl,
     update: (id: string) => `${TASKS_API.baseUrl}/${id}`,
     delete: (id: string) => `${TASKS_API.baseUrl}/${id}`,
+    search: (value: string) => `${TASKS_API.baseUrl}/search?query=${encodeURIComponent(value)}`,
   },
 } as const;
